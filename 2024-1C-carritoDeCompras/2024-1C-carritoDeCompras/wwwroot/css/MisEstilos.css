@@ -1,0 +1,88 @@
+﻿
+
+.navbar navbar {
+    background: url(../img/Carrito.png) no-repeat;
+    background-size: 40px 40px;
+    height: 40px;
+    width: 40px;
+    margin: 8px;
+}
+
+.menu-carrito {
+    background: url(../img/Carrito.png) no-repeat;
+    background-size: 40px 40px;
+    height: 40px;
+    width: 40px;
+    margin: 8px;
+}
+.principal {
+    align-content: center;
+    text-align: center;
+}
+
+.table {
+    color: antiquewhite;
+    width: 100%;
+}
+table, td, th {
+    border-collapse:collapse;
+    padding:2px;
+}
+
+th {
+    font-weight:bold;
+
+}
+
+tr:nth-child(even) {
+    background-color:grey;
+}
+
+tr:nth-child(odd) {
+    background-color:darkslategrey;
+}
+
+.centered-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Centrar la imagen */
+    margin-top: 2rem; /* Espacio superior */
+    /* Opcional: ajusta la altura del contenedor según tus necesidades */
+}
+
+/* Agregar espacio entre el título y la imagen */
+.space-between {
+    margin-bottom: 2rem; /* Espacio inferior */
+}
+
+body {
+    background-color: #333; /* Color de fondo gris oscuro */
+    color: white; /* Letra blanca */
+    font-family: Arial, sans-serif; /* Estilo de letra */
+}
+
+a {
+    text-decoration: none !important;
+    color: aquamarine;
+}
+
+    a:hover {
+        color: dimgrey;
+        text-shadow: initial;
+        transition: all 0.5s ease; /* Se aplica la transición a todas las propiedades */
+    }
+
+
+
+
+
+.display-4 {
+    font-size: 2.5rem; /* Tamaño del texto */
+    font-weight: bold; /* Negrita */
+    margin-bottom: 1rem; /* Espacio inferior */
+}
+
+.navbar-nav .nav-link {
+    color: black !important; /* Color del texto blanco */
+}

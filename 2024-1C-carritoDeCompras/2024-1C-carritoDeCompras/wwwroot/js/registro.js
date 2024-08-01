@@ -1,0 +1,1 @@
+alert("Registrate a nuestro Carrito de Compras para poder comprar en nuestras sucursales!");

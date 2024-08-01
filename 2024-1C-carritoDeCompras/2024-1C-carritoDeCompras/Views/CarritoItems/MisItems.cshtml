@@ -1,0 +1,76 @@
+﻿@model List<CarritoItem>
+
+@{
+    ViewData["Title"] = "MisItems";
+}
+
+<div style="color:black"class="row">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Resumen de tu Carrito: </h5>
+            <div>
+                Items Agregados: <b> @Model.Count </b>
+            </div>
+            <div>
+                Cantidad de Productos: <b>@Model.Sum(m => m.Cantidad)</b>
+            </div>
+            <div>
+                SubTotal de los productos seleccionados: <b>$@Model.Sum(s => s.SubTotal)</b>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<div>
+    <a class="btn btn-outline-info" asp-Controller="Productos" asp-action="Index">Seguir Comprando $</a>
+    <a class="btn btn-outline-success" asp-Controller="Compras" asp-action="Create">Finalizar Compra</a>
+    <a class="btn btn-outline-danger" asp-controller="Carritos" asp-action="VaciarCarrito">Vaciar Carrito</a>
+    <a class="btn btn-outline-danger" asp-controller="Compras" asp-action="ComprasRealizadas">Ver Compras Realizadas</a>
+</div>
+<br />
+
+<h5><b>Detalles de tu Compra</b></h5>
+<br />
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Nombre Producto
+            </th>
+            <th>
+                Precio Unitario
+            </th>
+            <th>
+                Cantidad
+            </th>
+            <th>
+                Subtotal
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (CarritoItem misItems in Model)
+        {
+            <tr>
+                <td>
+                    @misItems.Producto.Nombre
+                </td>
+                <td>
+                    $ @misItems.Producto.PrecioVigente
+                </td>
+                <td>
+                    @misItems.Cantidad
+                </td>
+                <td>
+                    $ @misItems.SubTotal
+                </td>
+                <td>
+                    <a class="btn btn-outline-danger" asp-controller="CarritoItems" asp-action="Delete" asp-route-id="@misItems.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

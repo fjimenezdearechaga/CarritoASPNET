@@ -1,0 +1,15 @@
+﻿body {
+    .card-body
+
+{
+    color: #000; /* Asegura que el texto sea negro */
+}
+
+.table thead th {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.table tbody td {
+    color: #000; /* Asegura que el texto en las celdas sea negro */
+}}

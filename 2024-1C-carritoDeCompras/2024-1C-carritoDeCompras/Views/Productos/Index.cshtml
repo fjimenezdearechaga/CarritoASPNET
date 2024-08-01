@@ -1,0 +1,147 @@
+﻿@model ProductModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Productos</h1>
+@if (User.IsInRole("Empleado") || User.IsInRole("Administrador"))
+{
+    <p>
+        <a asp-action="Create">Create</a>
+    </p>
+}
+
+@{
+    List<Producto> productosPausados = new List<Producto>();
+}
+
+<style></style>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h4>Nombre</h4>
+            </th>
+            <th>
+                <h4>Descripcion</h4>
+            </th>
+            <th>
+                <h4>Precio Actual</h4>
+            </th>
+            <th>
+                <h4>Categoria</h4>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.cat)
+        {
+            if (item.Productos != null)
+            { 
+                foreach (var producto in item.Productos)
+                {if (producto.Activo)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => producto.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => producto.Descripcion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => producto.PrecioVigente)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => producto.Categoria.Nombre)
+                            </td>
+                            @if (User.IsInRole("Empleado") || User.IsInRole("Administrador"))
+                            {
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@producto.Id">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@producto.Id">Details</a> |
+                                </td>
+                            }
+                            @if (User.IsInRole("Cliente"))
+                            {
+                                <td>
+                                    <form asp-action="AddToCart" method="post">
+                                        <input type="hidden" name="id" value="@producto.Id" />
+                                        <button type="submit">Agregar a Carrito</button>
+                                    </form>
+                                </td>
+
+                            }
+                        </tr>
+                    }
+                    else
+                    {
+                        productosPausados.Add(producto);
+                    }
+
+                }
+               
+
+        }
+
+       
+}
+    </tbody>
+</table>
+
+<h2>Productos Pausados</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h4>Nombre</h4>
+            </th>
+            <th>
+                <h4>Descripcion</h4>
+            </th>
+            <th>
+                <h4>Precio Actual</h4>
+            </th>
+            <th>
+                <h4>Categoria</h4>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @if(productosPausados!=null){
+        @foreach (Producto item in productosPausados)
+        {
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrecioVigente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Categoria.Nombre)
+                    </td>
+                        @if (User.IsInRole("Empleado") || User.IsInRole("Administrador"))
+                        {
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            </td>
+                            
+                        }
+                       
+                </tr>
+            }
+          }
+    }
+    </tbody>
+</table>

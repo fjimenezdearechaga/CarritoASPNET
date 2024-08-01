@@ -1,0 +1,81 @@
+﻿@model Tuple<Compra, Sucursal>
+
+@{
+    ViewData["Title"] = "CrearCompra";
+}
+
+<h3 class="text-center text-success"><b>¡Gracias por confiar en Nuestro Carrito de Compras!</b></h3>
+<br />
+
+<div style="color:black"  class="row">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Resumen de tu Compra:  </h5>
+            <div>
+                Cliente: <b> @Model.Item1.Cliente.Nombre  @Model.Item1.Cliente.Apellido</b>
+            </div>
+            <div>
+                ID de Compra: <b> @Model.Item1.Id </b>
+            </div>
+            <div>
+                Cantidad de Productos: <b>@Model.Item1.Carrito.Items.Sum(m => m.Cantidad)</b>
+            </div>
+            <div>
+                Total: <b>$@Model.Item1.Carrito.Subtotal</b>
+            </div>
+            <div>
+                Sucursal: <b>@Model.Item2.Email</b>
+            </div>
+            <div>
+                Dirección de Sucursal: <b>@Model.Item2.Direccion</b>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<h5><b>Detalles de tu Compra</b></h5>
+<br />
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Nombre Producto
+            </th>
+            <th>
+                Precio Unitario
+            </th>
+            <th>
+                Cantidad
+            </th>
+            <th>
+                Subtotal
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (CarritoItem misItems in Model.Item1.Carrito.Items)
+        {
+            <tr>
+                <td>
+                    @misItems.Producto.Nombre
+                </td>
+                <td>
+                    $ @misItems.Producto.PrecioVigente
+                </td>
+                <td>
+                    @misItems.Cantidad
+                </td>
+                <td>
+                    $ @misItems.SubTotal
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a class="btn btn-outline-info" asp-action="ComprasRealizadas">Compras Realizadas</a>
+</div>
